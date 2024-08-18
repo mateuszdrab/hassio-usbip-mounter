@@ -31,7 +31,7 @@ if ! bashio::fs.file_exists "${mount_script}"; then
   for device in $(bashio::config 'devices|keys'); do
     server_address=$(bashio::config "devices[${device}].server_address")
     bus_id=$(bashio::config "devices[${device}].bus_id")
-    bashio::log.info "Adding device from server ${server_address} on bus ${bus_id}"
-    echo "/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id}" >> "${mount_script}"
+    bashio::log.debug "Adding device from server ${server_address} on bus ${bus_id}"
+    echo "/usr/sbin/usbip --debug attach -r ${server_address} -b ${bus_id} || true" >> "${mount_script}"
   done
 fi
